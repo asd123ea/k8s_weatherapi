@@ -1,0 +1,12 @@
+# We only ship the published app in the image
+# so we only use ASPNET runtime as the base-image
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS runtime
+
+EXPOSE 80
+EXPOSE 443
+
+# Copy 
+WORKDIR /app
+COPY ./publish ./
+
+ENTRYPOINT ["dotnet", "weatherapi.dll"]
