@@ -15,10 +15,16 @@ namespace UnitTests
             Assert.True(true);
         }
 
-         [Test]
+        [Test]
         public void Test2()
         {
             Assert.True(true);
+        }
+
+        [Test]
+        public void Test3()
+        {
+            Assert.True(false);
         }
     }
 }
