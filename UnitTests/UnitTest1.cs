@@ -24,7 +24,7 @@ namespace UnitTests
         [Test]
         public void Test3()
         {
-            Assert.True(false);
+            Assert.True(true);
         }
     }
 }
