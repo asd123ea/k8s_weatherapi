@@ -15,7 +15,7 @@ EXPOSE 443
 WORKDIR /app
 COPY . .
 
-ENTRYPOINT ["./weatherapi", "--urls", "http://0.0.0.0:80"]
+ENTRYPOINT [".", "--urls", "http://0.0.0.0:80"]
 
 ########################
 ## EXECUTE THIS COMMAND FIRST
