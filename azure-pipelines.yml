@@ -66,6 +66,10 @@ steps:
     Dockerfile: '**/Dockerfile'
 
 - task: Docker@2
+  inputs:
+    command: 'login'
+
+- task: Docker@2
   displayName: docker build and publish
   inputs:
     repository: 'brunobck/weatherapi'
