@@ -13,12 +13,11 @@ EXPOSE 443
 
 # Copy 
 WORKDIR /app
-COPY $(Build.SourcesDirectory)/publish ./
+COPY . .
 
 ENTRYPOINT ["./weatherapi", "--urls", "http://0.0.0.0:80"]
 
 ########################
 ## EXECUTE THIS COMMAND FIRST
 ## dotnet publish --runtime alpine-x64 -c Release --self-contained true -o ./publish
-## --runtime alpine-x64 -c Release --self-contained true -o $(Build.SourcesDirectory)/publish
 ########################
