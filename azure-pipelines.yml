@@ -30,13 +30,13 @@ steps:
     restoreSolution: '$(solution)'
 
 - task: DotNetCoreCLI@2
-  displayName: aspnetcore build
+  displayName: dotnet build
   inputs:
     command: 'build'
     projects: '**/UnitTests.csproj'
 
 - task: DotNetCoreCLI@2
-  displayName: aspnetcore test
+  displayName: dotnet test
   inputs:
     command: 'test'
     projects: '**/UnitTests.csproj'
@@ -44,11 +44,21 @@ steps:
 
 
 - task: DotNetCoreCLI@2
-  displayName: aspnetcore test 2
+  displayName: dotnet test 2
   inputs:
     command: test
     projects: '**/*Tests/*.csproj'
     arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
+
+- task: DotNetCoreCLI@2
+  displayName: dotnet publish
+  inputs:
+    command: 'publish'
+    publishWebProjects: false
+    projects: '**/weatherapi.csproj'
+    zipAfterPublish: false
+    modifyOutputPath: false
+    workingDirectory: './publish'
 
 - task: Docker@2
   displayName: docker build and publish
