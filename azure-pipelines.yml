@@ -49,19 +49,25 @@ steps:
     projects: '**/*Tests/*.csproj'
     arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
 
-- task: DotNetCoreCLI@2
-  displayName: 'list envs'
+- task: Bash@3
   inputs:
-    command: custom
-    custom: tool
-    arguments: 'env'
+    targetType: 'inline'
+    script: |
+      # Write your commands here
+      
+      echo 'Hello world'
 
-- task: DotNetCoreCLI@2
-  displayName: 'pwd'
+- task: Bash@3
   inputs:
-    command: custom
-    custom: tool
-    arguments: 'pwd'
+    targetType: 'inline'
+    script: |
+      pwd
+
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      env
 
 - task: Docker@2
   displayName: docker build and publish
