@@ -14,19 +14,29 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
+
 steps:
 - task: NuGetToolInstaller@1
+  displayName: NuGetTool Installer
+
+- task: DockerInstaller@0
+  displayName: Docker Installer
+  inputs:
+    dockerVersion: 17.09.0-ce
+    releaseType: stable
 
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solution)'
 
 - task: DotNetCoreCLI@2
+  displayName: aspnetcore build
   inputs:
     command: 'build'
     projects: '**/UnitTests.csproj'
 
 - task: DotNetCoreCLI@2
+  displayName: aspnetcore test
   inputs:
     command: 'test'
     projects: '**/UnitTests.csproj'
@@ -34,12 +44,14 @@ steps:
 
 
 - task: DotNetCoreCLI@2
+  displayName: aspnetcore test 2
   inputs:
     command: test
     projects: '**/*Tests/*.csproj'
     arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
 
 - task: Docker@2
+  displayName: docker build and publish
   inputs:
     repository: 'brunobck/weatherapi'
     command: 'buildAndPush'
