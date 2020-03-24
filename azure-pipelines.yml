@@ -38,3 +38,9 @@ steps:
     command: test
     projects: '**/*Tests/*.csproj'
     arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
+
+- task: Docker@2
+  inputs:
+    repository: 'brunobck/weatherapi'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
