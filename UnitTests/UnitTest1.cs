@@ -39,5 +39,4 @@ namespace UnitTests
             Assert.True(true);
         }
     }
-    }
 }
