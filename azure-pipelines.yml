@@ -14,7 +14,6 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
-
 steps:
 - task: NuGetToolInstaller@1
   displayName: NuGetTool Installer
@@ -51,14 +50,18 @@ steps:
     arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
 
 - task: DotNetCoreCLI@2
-  displayName: dotnet publish
+  displayName: 'list envs'
   inputs:
-    command: 'publish'
-    publishWebProjects: false
-    projects: '**/weatherapi.csproj'
-    zipAfterPublish: false
-    modifyOutputPath: false
-    workingDirectory: 'API'
+    command: custom
+    custom: tool
+    arguments: 'env'
+
+- task: DotNetCoreCLI@2
+  displayName: 'pwd'
+  inputs:
+    command: custom
+    custom: tool
+    arguments: 'pwd'
 
 - task: Docker@2
   displayName: docker build and publish
@@ -66,3 +69,4 @@ steps:
     repository: 'brunobck/weatherapi'
     command: 'buildAndPush'
     Dockerfile: '**/Dockerfile'
+
