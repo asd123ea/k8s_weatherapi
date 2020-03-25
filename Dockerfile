@@ -4,6 +4,6 @@ FROM mcr.microsoft.com/dotnet/core/aspnet:3.0
 # This is directive for CMD command to be executed.
 WORKDIR /app
 # Copy only the deployment artifacts
-COPY ./linux-64 .
+COPY . .
 
 ENTRYPOINT ["dotnet", "weatherapi.dll"]
