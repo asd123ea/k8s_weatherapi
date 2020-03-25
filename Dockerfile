@@ -17,7 +17,6 @@ WORKDIR /app
 # Copy only the deployment artifacts
 COPY . .
 
-########################
-## EXECUTE THIS COMMAND FIRST
-## dotnet publish --runtime alpine-x64 -c Release --self-contained true -o ./publish
-########################
+ADD run.sh /tmp/run.sh
+RUN chmod +x /tmp/run.sh
+ENTRYPOINT ["/tmp/run.sh"]
