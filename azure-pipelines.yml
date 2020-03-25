@@ -47,7 +47,7 @@ steps:
     command: 'publish'
     publishWebProjects: false
     projects: '**/weatherapi.csproj'
-    arguments: '--runtime alpine-x64 -c Release --self-contained true'
+    arguments: '--runtime linux-x64 -c Release --self-contained true'
     zipAfterPublish: false
     modifyOutputPath: false
 
