@@ -41,7 +41,7 @@ steps:
     command: 'publish'
     publishWebProjects: false
     projects: '**/weatherapi.csproj'
-    arguments: 'API/weatherapi.csproj --runtime linux-x64 -c Release --self-contained true -o ./out'
+    arguments: '--runtime linux-x64 -c Release --self-contained true -o ./out'
     zipAfterPublish: false
     modifyOutputPath: false
 
