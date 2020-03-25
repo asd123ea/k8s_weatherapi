@@ -11,11 +11,11 @@ RUN apk add --no-cache \
 EXPOSE 80
 EXPOSE 443
 
-# Copy 
+# Create app directory
+# This is directive for CMD command to be executed.
 WORKDIR /app
+# Copy only the deployment artifacts
 COPY . .
-
-ENTRYPOINT [".", "--urls", "http://0.0.0.0:80"]
 
 ########################
 ## EXECUTE THIS COMMAND FIRST

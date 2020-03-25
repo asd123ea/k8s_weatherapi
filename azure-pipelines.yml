@@ -37,16 +37,8 @@ steps:
 - task: DotNetCoreCLI@2
   displayName: dotnet test
   inputs:
-    command: 'test'
-    projects: '**/UnitTests.csproj'
-    arguments: '--configuration $(buildConfiguration)'
-
-
-- task: DotNetCoreCLI@2
-  displayName: dotnet test 2
-  inputs:
     command: test
-    projects: '**/*Tests/*.csproj'
+    projects: '**/UnitTests.csproj'
     arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
 
 - task: DotNetCoreCLI@2
@@ -60,12 +52,7 @@ steps:
     modifyOutputPath: false
 
 - task: Docker@2
-  inputs:
-    repository: 'brunobck/weatherapi'
-    command: 'build'
-    Dockerfile: '**/Dockerfile'
-
-- task: Docker@2
+  displayName: docker login
   inputs:
     containerRegistry: 'dockerHubb'
     command: 'login'
