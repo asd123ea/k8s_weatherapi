@@ -29,12 +29,6 @@ steps:
     restoreSolution: '$(solution)'
 
 - task: DotNetCoreCLI@2
-  displayName: dotnet build
-  inputs:
-    command: 'build'
-    projects: '**/UnitTests.csproj'
-
-- task: DotNetCoreCLI@2
   displayName: dotnet test
   inputs:
     command: test
@@ -47,7 +41,7 @@ steps:
     command: 'publish'
     publishWebProjects: false
     projects: '**/weatherapi.csproj'
-    arguments: '--runtime linux-x64 -c Release --self-contained true'
+    arguments: '--runtime linux-x64 -c Release --self-contained true -o ./out'
     zipAfterPublish: false
     modifyOutputPath: false
 
@@ -58,9 +52,16 @@ steps:
     command: 'login'
 
 - task: Docker@2
-  displayName: docker build and publish
+  displayName: docker build
   inputs:
+    containerRegistry: 'dockerHubb'
     repository: 'brunobck/weatherapi'
-    command: 'buildAndPush'
+    command: 'build'
     Dockerfile: '**/Dockerfile'
 
+- task: Docker@2
+  displayName: docker publish
+  inputs:
+    containerRegistry: 'dockerHubb'
+    repository: 'brunobck/weatherapi'
+    command: 'push'
